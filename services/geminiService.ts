@@ -2,7 +2,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Job, UserProfile } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
 
 export const findJobs = async (location: string): Promise<Job[]> => {
   const prompt = `Find 10 HIGH-PRIORITY, ACTIVE job openings for "QA Lead" or "Senior Manual Test Lead" in ${location}.
@@ -19,7 +19,7 @@ export const findJobs = async (location: string): Promise<Job[]> => {
   In 'matchReasons', explain HOW the email was verified (e.g., "Found on official careers page", "Verified recruiter pattern").`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-pro-preview", // Upgraded to Pro for better reasoning and search grounding
+    model: "gemini-2.0-flash", // Using stable Gemini 2.0 Flash model
     contents: prompt,
     config: {
       tools: [{ googleSearch: {} }],
@@ -74,7 +74,7 @@ export const generateEmail = async (job: Job, profile: UserProfile): Promise<{ s
   4. Ensure the name Nireesha Kalyanam is used.`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: "gemini-2.0-flash",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
