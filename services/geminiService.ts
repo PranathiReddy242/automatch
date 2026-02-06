@@ -2,7 +2,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Job, UserProfile } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+const apiKey = process.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY || '';
+const ai = new GoogleGenAI({ apiKey });
 
 export const findJobs = async (location: string): Promise<Job[]> => {
   const prompt = `Find 10 HIGH-PRIORITY, ACTIVE job openings for "QA Lead" or "Senior Manual Test Lead" in ${location}.
