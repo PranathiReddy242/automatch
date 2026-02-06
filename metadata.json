@@ -1,0 +1,7 @@
+{
+  "name": "QA Outreach Pro",
+  "description": "A smart job discovery and outreach assistant tailored for QA Leads and Senior Manual Testers with 8+ years of experience.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
